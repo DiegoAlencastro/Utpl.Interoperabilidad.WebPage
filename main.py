@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
+import requests
+
 app = Flask(__name__)
 
 # Lista de personas
@@ -17,7 +19,8 @@ def about():
 
 @app.route('/personas')
 def personas():
-    return render_template('personas.html', personas=personaList)
+    response = requests.get('https://utpl-interoperabilidad-fdquinones.onrender.com/v1_0/personas')
+    return render_template('personas.html', personas=response.json())
 
 @app.route('/personas', methods=['POST'])
 def add():
@@ -30,13 +33,10 @@ def add():
 
     return redirect(url_for('personas'))
 
-    @app.route('/about')
-def about():
-    return render_template('about.html')
-
-    @app.route('/clientes')
-def clientes():
-    return render_template('clientes.html', clientes=personaList)
+@app.route('/huespedes')
+def huespedes():
+    responseHabitaciones = requests.get('https://utpl-interoperabilidad-ejercicio1.onrender.com/v1_0/huesped')
+    return render_template('huespedes.html', huespedesl=responseHabitaciones.json())
 
 if __name__ == '__main__':
     app.run(debug=True)
