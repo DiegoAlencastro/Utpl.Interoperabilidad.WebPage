@@ -30,5 +30,13 @@ def add():
 
     return redirect(url_for('personas'))
 
+    @app.route('/about')
+def about():
+    return render_template('about.html')
+
+    @app.route('/clientes')
+def clientes():
+    return render_template('clientes.html', clientes=personaList)
+
 if __name__ == '__main__':
     app.run(debug=True)
