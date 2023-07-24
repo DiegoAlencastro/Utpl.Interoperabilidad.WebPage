@@ -33,14 +33,14 @@ def add():
 
     return redirect(url_for('personas'))
 
-@app.route('/huespedes')
-def huespedes():
+@app.route('/clientes')
+def clientes():
     responseHabitaciones = requests.get('https://utpl-interoperabilidad-ejercicio1.onrender.com/v1_0/huesped')
-    return render_template('huespedes.html', huespedesl=responseHabitaciones.json())
+    return render_template('clientes.html', clientesl=responseHabitaciones.json())
 
-@app.route('/huespedes', methods=['POST'])
-def addHuesped():
-    print("llego por aqui a guardar huespedes")
+@app.route('/clientes', methods=['POST'])
+def addClientes():
+    print("llego por aqui a guardar clientes")
 
     nombreValue = request.form.get('nombre')
     ciudad = request.form.get('ciudad')
